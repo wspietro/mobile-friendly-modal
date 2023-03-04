@@ -9,7 +9,7 @@ import styled from "styled-components";
   We'll learn more about breakpoints in the
   upcoming lessons.
 */
-const MOBILE_BREAKPOINT = 550;
+const MOBILE_BREAKPOINT = 34.375;
 
 function Modal({
   title,
@@ -22,7 +22,7 @@ function Modal({
   }
 
   return (
-    <Overlay>
+    <Overlay onClick={handleDismiss}>
       <Content>
         <Header>
           <Title>{title}</Title>
@@ -54,25 +54,42 @@ const Overlay = styled.div`
 const Content = styled.div`
   position: relative;
   background: white;
-  border-radius: 8px;
-  width: 65%;
+  border-radius: 0px;
+  width: 100%;
+  height: 100%;
+
+  @media (min-width: ${MOBILE_BREAKPOINT}rem) {
+    width: 65%;
+    height: revert;
+    border-radius: 8px;
+  }
 `;
 
 const Header = styled.header`
   padding: 16px;
   padding-bottom: 8px;
+  border-bottom: 1px solid rgb(0,0,0, 0.2);
+
+  @media (min-width: ${MOBILE_BREAKPOINT}rem) {
+    border: none;
+  }
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: -48px;
+  top: 3px;
   right: 0;
   background: transparent;
   border: none;
   width: 48px;
   height: 48px;
   cursor: pointer;
-  color: white;
+  color: black;
+
+  @media (min-width: ${MOBILE_BREAKPOINT}rem) {
+    top: -48px;
+    color: white;
+  }
 `;
 
 const Title = styled.h2`
