@@ -1,7 +1,7 @@
 import { X } from "react-feather";
 import styled from "styled-components";
 import { DialogOverlay, DialogContent } from '@reach/dialog'
-//TODO: alterar para radix ui
+import * as Dialog from '@radix-ui/react-dialog'
 
 /*
   This value is provided for your convenience.
@@ -14,29 +14,16 @@ import { DialogOverlay, DialogContent } from '@reach/dialog'
 const MOBILE_BREAKPOINT = 34.375;
 
 function Modal({
-  title,
-  isOpen,
-  handleDismiss,
   children
 }) {
-  if (!isOpen) {
-    return null;
-  }
 
   return (
-    <Overlay
-      onClick={handleDismiss}
-      isOpen={isOpen}
-      onDismiss={handleDismiss}
-    >
-      <Content aria-lable={title}>
+    <Overlay>
+      <Content>
         <Header>
-          <Title>{title}</Title>
-          <CloseButton onClick={handleDismiss}>
+          <Dialog.Title>Contact Us</Dialog.Title>
+          <CloseButton>
             <X />
-            <VisuallyHidden>
-              Dismiss modal
-            </VisuallyHidden>
           </CloseButton>
         </Header>
         <ChildWrapper>{children}</ChildWrapper>
@@ -45,19 +32,16 @@ function Modal({
   );
 }
 
-const Overlay = styled(DialogOverlay)`
+const Overlay = styled(Dialog.Overlay)`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: hsl(0deg 0% 0% / 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const Content = styled(DialogContent)`
+const Content = styled(Dialog.Content)`
   position: relative;
   background: white;
   border-radius: 0px;
@@ -81,7 +65,7 @@ const Header = styled.header`
   }
 `;
 
-const CloseButton = styled.button`
+const CloseButton = styled(Dialog.Close)`
   position: absolute;
   top: 3px;
   right: 0;
@@ -96,21 +80,6 @@ const CloseButton = styled.button`
     top: -48px;
     color: white;
   }
-`;
-
-const Title = styled.h2`
-  font-size: 1.5rem;
-`;
-
-const VisuallyHidden = styled.span`
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
 `;
 
 const ChildWrapper = styled.div`

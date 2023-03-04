@@ -1,3 +1,4 @@
+import * as Dialog from "@radix-ui/react-dialog";
 import React from "react";
 import styled from "styled-components";
 
@@ -7,10 +8,6 @@ import Modal from "./Modal";
 import "./styles.css";
 
 function App() {
-  const [
-    showModal,
-    setShowModal
-  ] = React.useState(false);
 
   return (
     <>
@@ -28,20 +25,18 @@ function App() {
         </nav>
       </Header>
       <Main>
-        <ContactButton
-          onClick={() => setShowModal(true)}
-        >
-          Open contact form
-        </ContactButton>
-      </Main>
+        <Dialog.Root>
+          <Dialog.Trigger asChild>
+            <ContactButton>
+              Open contact form
+            </ContactButton>
+          </Dialog.Trigger>
 
-      <Modal
-        title="Contact Us"
-        isOpen={showModal}
-        handleDismiss={() => setShowModal(false)}
-      >
-        <ContactForm />
-      </Modal>
+          <Modal>
+            <ContactForm />
+          </Modal>
+        </Dialog.Root>
+      </Main>
     </>
   );
 }
