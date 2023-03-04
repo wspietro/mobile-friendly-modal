@@ -1,5 +1,7 @@
 import { X } from "react-feather";
 import styled from "styled-components";
+import { DialogOverlay, DialogContent } from '@reach/dialog'
+//TODO: alterar para radix ui
 
 /*
   This value is provided for your convenience.
@@ -22,8 +24,12 @@ function Modal({
   }
 
   return (
-    <Overlay onClick={handleDismiss}>
-      <Content>
+    <Overlay
+      onClick={handleDismiss}
+      isOpen={isOpen}
+      onDismiss={handleDismiss}
+    >
+      <Content aria-lable={title}>
         <Header>
           <Title>{title}</Title>
           <CloseButton onClick={handleDismiss}>
@@ -39,7 +45,7 @@ function Modal({
   );
 }
 
-const Overlay = styled.div`
+const Overlay = styled(DialogOverlay)`
   position: fixed;
   top: 0;
   left: 0;
@@ -51,7 +57,7 @@ const Overlay = styled.div`
   align-items: center;
 `;
 
-const Content = styled.div`
+const Content = styled(DialogContent)`
   position: relative;
   background: white;
   border-radius: 0px;
